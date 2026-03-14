@@ -1,0 +1,61 @@
+// Approval failure during onchain agent call for ERC20 token (EURC)
+// Timestamp: 2025-05-08
+// File: /api/agent/approve-tokens/route.ts
+// Wallet: 0xdF1C7676c27a35cf460c350BDF7Fe90123109b1D
+// Tx attempted: approve(spender=0x6Cb442acF35158D5eDa88fe602221b67B400Be3E, amount=6000000)
+// Full logs below ⬇
+
+○ Compiling /api/agent/approve-tokens ...
+ ✓ Compiled /api/agent/approve-tokens in 1613ms (4678 modules)
+
+🔍 Checking token allowance...
+📥 Request body: {
+  "tokenAddress": "0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42",
+  "spenderAddress": "0x6Cb442acF35158D5eDa88fe602221b67B400Be3E"
+}
+✅ Allowance retrieved successfully: 0
+🔍 Comparing allowance 0 vs required amount 5000000
+⚠️ Insufficient allowance! Requesting approval for: 6000000
+
+Sending contract write: {
+  contractAddress: '0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42',
+  functionName: 'approve',
+  args: [
+    '0x6Cb442acF35158D5eDa88fe602221b67B400Be3E',
+    '6000000'
+  ]
+}
+Calling SmartWalletProvider.sendUserOperation with: {
+  calls: [
+    {
+      callType: 'call',
+      to: '0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42',
+      data: '0x095ea7b30000000000000000000000006cb442acf35158d5eda88fe602221b67b400be3e00000000000000000000000000000000000000000000000000000000005b8d80',
+      value: '0x0'
+    }
+  ]
+}
+Transaction failed: MalformedRequestError
+  ...
+  apiMessage: 'failed to prepare calls',
+  correlationId: '93ca5dced97177bb-IAD'
+
+Approval Error: {
+  error: "Approval transaction failed",
+  details: "failed to prepare calls",
+  code: "malformed_request"
+}
+POST /api/agent/approve-tokens 500 in 2334ms
+
+❌ Retry also failed using fallback amount (10000000)
+Transaction failed: MalformedRequestError
+  ...
+  apiMessage: 'failed to prepare calls',
+  correlationId: '93ca5dd09b86ca4d-IAD'
+
+Approval Retry Error: {
+  error: "Fallback approval failed",
+  details: "failed to prepare calls",
+  code: "malformed_request"
+}
+POST /api/agent/approve-tokens 500 in 2291ms

@@ -1,0 +1,48 @@
+// Swap failure during onchain agent call to Aerodrome Router
+// Timestamp: 2025-05-05
+// File: /api/agent/swap-tokens/route.ts
+// Wallet: 0xdF1C7676c27a35cf460c350BDF7Fe90123109b1D
+// Tx attempted: swapExactTokensForTokens (stable=false then fallback stable=true)
+// Full logs below ⬇
+
+○ Compiling /api/agent/swap-tokens ...
+ ✓ Compiled /api/agent/swap-tokens in 1565ms (4682 modules)
+Sending contract write: {
+  contractAddress: '0xcF77a3Ba9A5CA399B7c97c74d54e5b1Beb874E43',
+  functionName: 'swapExactTokensForTokens',
+  args: [
+    '5000000',
+    '4950000',
+    [ [Object] ],
+    '0xdF1C7676c27a35cf460c350BDF7Fe90123109b1D',
+    1746474168
+  ]
+}
+Transaction failed: MalformedRequestError
+  ...
+  apiMessage: 'failed to prepare calls',
+  correlationId: '93b28d32388b2d4f-IAD'
+
+Stable=false route failed, retrying with stable=true...
+Sending contract write: {
+  contractAddress: '0xcF77a3Ba9A5CA399B7c97c74d54e5b1Beb874E43',
+  functionName: 'swapExactTokensForTokens',
+  args: [
+    '5000000',
+    '4950000',
+    [ [Object] ],
+    '0xdF1C7676c27a35cf460c350BDF7Fe90123109b1D',
+    1746474168
+  ]
+}
+Transaction failed: MalformedRequestError
+  ...
+  apiMessage: 'failed to prepare calls',
+  correlationId: '93b28d33daac77bc-IAD'
+
+Swap Error: {
+  error: "Swap transaction failed (fallback)",
+  details: "failed to prepare calls",
+  code: "malformed_request"
+}
+POST /api/agent/swap-tokens 500 in 2972ms
